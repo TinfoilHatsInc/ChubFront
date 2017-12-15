@@ -1,0 +1,16 @@
+{% if content is not empty %}
+  {% set contentSource %}
+    {% include(template_from_string(source(content))) %}
+  {% endset %}
+{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+{% if contentSource is not empty %}
+  {{ contentSource }}
+{% endif %}
+</body>
+</html>

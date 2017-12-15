@@ -1,0 +1,34 @@
+RewriteBase /
+
+ErrorDocument 400 /404
+ErrorDocument 401 /404
+ErrorDocument 403 /404
+ErrorDocument 404 /404
+ErrorDocument 500 /404
+
+Options All -Indexes
+
+Options +FollowSymLinks +ExecCGI
+
+RewriteEngine On
+
+RedirectMatch 404 /\.git
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/(css|js|img|media|png)/ [NC]
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+<Files *.*>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files index.php>
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<Files ~ "\.(css|js|img|media|svg|ttf|woff|gif|png|jpg)$">
+    Order Allow,Deny
+    Allow from all
+</Files>

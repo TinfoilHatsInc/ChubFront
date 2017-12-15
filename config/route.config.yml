@@ -1,0 +1,3 @@
+login:
+  template: 'login'
+  controller: 'core\login\LoginController::login'
