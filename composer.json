@@ -1,0 +1,10 @@
+{
+  "name": "tinfoilhatsinc/chub-front",
+  "description": "TinfoilHats Inc. CHUB front",
+  "license": "MIT",
+  "require": {
+    "eden/sqlite": "^4.0",
+    "twig/twig": "^2.4",
+    "symfony/yaml": "^3.4"
+  }
+}
