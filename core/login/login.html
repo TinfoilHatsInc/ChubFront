@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Central Hub Login</title>
+    <title>TH Central Hub Login</title>
     <link rel="stylesheet" href="login.css">
   </head>
    <form action="/LoginController.php">
@@ -11,9 +11,12 @@
 
     <div class="container">
       <p style="font-family:Arial">
-        <label><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <label><b>Email Address</b></label>
+        <input type="text" placeholder="Enter Email Address" name="uname" required>
+        <span class="error"> <?php echo $emailErr;?></span>
+        
         <br>
+        
         <label><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="pw" required>
       </p>
