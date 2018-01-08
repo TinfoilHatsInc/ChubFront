@@ -15,7 +15,7 @@ RewriteEngine On
 RedirectMatch 404 /\.git
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !^/(css|js|img|media|png)/ [NC]
+RewriteCond %{REQUEST_URI} !^/(css|js|img|media|png|m4v|mp4)/ [NC]
 RewriteRule ^(.*)$ index.php [L,QSA]
 
 <Files *.*>
@@ -28,7 +28,7 @@ RewriteRule ^(.*)$ index.php [L,QSA]
     Allow from all
 </Files>
 
-<Files ~ "\.(css|js|img|media|svg|ttf|woff|gif|png|jpg)$">
+<Files ~ "\.(css|js|img|media|svg|ttf|woff|gif|png|jpg|m4v|mp4)$">
     Order Allow,Deny
     Allow from all
 </Files>

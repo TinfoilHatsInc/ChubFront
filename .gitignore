@@ -3,3 +3,6 @@ vendor
 .DS_Store
 composer.lock
 cache
+node_modules
+package-lock.json
+/files/**/*

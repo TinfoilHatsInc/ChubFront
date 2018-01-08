@@ -1,0 +1,28 @@
+aside.menu {
+  width: 200px;
+  background-color: $first-bg-color;
+  height: 100%;
+  display: inline-block;
+  position: fixed;
+  border-right: 1px solid darken($first-bg-color, 20%);
+  nav {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 10px;
+      li {
+        a {
+          @extend button;
+          display: inline-block;
+          padding-left: 0;
+          padding-right: 0;
+          text-decoration: none;
+          text-align: center;
+          &.active {
+            background-color: transparentize($primary-button-color, 0.7) !important;
+          }
+        }
+      }
+    }
+  }
+}

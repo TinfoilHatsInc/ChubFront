@@ -4,23 +4,31 @@ namespace core\routing;
 
 use core\common\Singleton;
 use core\templating\TemplateController;
-use Eden\Collection\Exception;
 use Symfony\Component\Yaml\Yaml;
+use TinfoilHMAC\Util\Session;
 
 class RoutingController extends Singleton
 {
 
   private $routeConfig;
   private $routeMapping;
+  private $activeRouteConfig;
 
   /**
    * @return array
    */
-  private function getRouteConfig() {
+  public function getRouteConfig() {
     if(empty($this->routeConfig)) {
       $this->routeConfig = Yaml::parse(file_get_contents(__DIR__ . '/../../config/route.config.yml'));
     }
     return $this->routeConfig;
+  }
+
+  public function getRouteMappings() {
+    if(empty($this->routeMapping)) {
+      $this->routeMapping = Yaml::parse(file_get_contents(__DIR__ . '/../../config/route.mapping.yml'));
+    }
+    return $this->routeMapping;
   }
 
   /**
@@ -28,15 +36,16 @@ class RoutingController extends Singleton
    * @return array
    */
   private function getRouteMap($url) {
-
-    if(empty($this->routeMapping)) {
-      $this->routeMapping = Yaml::parse(file_get_contents(__DIR__ . '/../../config/route.mapping.yml'));
-    }
-    if(array_key_exists($url, $this->routeMapping)) {
-      $mapping = $this->routeMapping[$url];
+    $routeMapping = $this->getRouteMappings();
+    if(array_key_exists($url, $routeMapping)) {
+      $mapping = $routeMapping[$url];
       $config = $this->getRouteConfig();
       if(array_key_exists($mapping, $config)) {
-        return $config[$mapping];
+        $routeConfig = array_merge([
+          'routeName' => $mapping,
+        ], $config[$mapping]);
+        $this->activeRouteConfig = $routeConfig;
+        return $routeConfig;
       } else {
         throw new \InvalidArgumentException('No route config found for route name \'' .$mapping. '\'.');
       }
@@ -98,13 +107,29 @@ class RoutingController extends Singleton
     $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
     $url = $uri_parts[0];
 
+    if($url == '/') {
+      $this->redirectRoute('home');
+      exit;
+    }
+
     try {
       $routeConfig = $this->getRouteMap($url);
     } catch (\InvalidArgumentException $e) {
       $this->throwHTTP404();
     }
 
-    $templateName = $routeConfig['template'];
+    // Check if there is a known shared key registered.
+    if(!Session::getInstance()->hasKnownSharedKey() && $this->getActiveRouteName() != 'login') {
+      // If no key is registered force the user to login.
+//      $this->redirectRoute('login');
+    }
+
+    if(array_key_exists('template', $routeConfig)) {
+      $templateName = $routeConfig['template'];
+    } else {
+      $templateName = '';
+    }
+
     $controller = $routeConfig['controller'];
 
     $variables = $this->callController($controller, $_GET);
@@ -113,6 +138,22 @@ class RoutingController extends Singleton
 
     return $templateController->getTemplate($templateName, $variables);
 
+  }
+
+  public function redirectRoute($routeName, $params = []) {
+
+    $mappings = array_flip($this->getRouteMappings());
+
+    if(array_key_exists($routeName, $mappings)) {
+      header('Location: ' . $mappings[$routeName]);
+    } else {
+      throw new \InvalidArgumentException('Route with name \'' . $routeName . '\' could not be found.');
+    }
+
+  }
+
+  public function getActiveRouteName() {
+    return $this->activeRouteConfig['routeName'];
   }
 
 }

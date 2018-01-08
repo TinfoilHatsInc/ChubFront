@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="column large-12">
+    <div class="column-content">
+      <form action="/login" method="post">
+        <div class="image-container">
+          <p><img src="/images/transparent_logo.png" alt="Logo" class="logo"></p>
+          <p><strong> Please log in with your TinfoilHats account to continue. </strong></p>
+        </div>
+
+        <div class="container">
+          <p>
+            <label><b>Email Address</b></label>
+            <input type="text" placeholder="Enter Email Address" name="username" required>
+            <span class="error">{{ emailError }}</span>
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <span class="error">{{ passwordError }}</span>
+          </p>
+          <p>
+            <span class="error">{{ loginError }}</span>
+          </p>
+          <p>
+            <button type="submit">Login</button>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

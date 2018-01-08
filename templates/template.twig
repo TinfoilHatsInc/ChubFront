@@ -1,12 +1,15 @@
 {% if content is not empty %}
   {% set contentSource %}
-    {% include(template_from_string(source(content))) %}
+    {% include(template_from_string(content)) %}
   {% endset %}
 {% endif %}
 <!DOCTYPE html>
 <html>
 <head>
-
+  <script src='/node_modules/jquery/dist/jquery.min.js'></script>
+  <script src='/node_modules/jquery-ui-dist/jquery-ui.min.js'></script>
+  <link rel="stylesheet" href="/style/css/style.min.css">
+  <script src="/js/dist/main.min.js"></script>
 </head>
 <body>
 {% if contentSource is not empty %}

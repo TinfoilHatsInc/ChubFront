@@ -1,0 +1,12 @@
+@function calculate-flex-basis($size) {
+  @return ($size / $grid-max-size) * 100%;
+}
+
+@mixin grid-column($size) {
+  $basis: calculate-flex-basis($size);
+  flex: 0 0 $basis;
+  -webkit-flex: 0 0 $basis;
+  -ms-flex: 0 0 $basis;
+  max-width: $basis;
+  width: $basis;
+}

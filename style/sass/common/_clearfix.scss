@@ -1,0 +1,7 @@
+.clear-fix {
+  *zoom: 1;
+  clear: both;
+  &:after {
+    clear: both;
+  }
+}

@@ -2,30 +2,67 @@
 
 namespace core\login;
 
-$name = $password = $rememberMe = "";
-$emailError = $pwError = "";
+use core\common\ConfigReader;
+use core\routing\RoutingController;
+use TinfoilHMAC\API\SecureRequest;
+use TinfoilHMAC\Exception\InvalidResponseException;
+use TinfoilHMAC\Util\UserSession;
 
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$name = validateInput($_POST["uname"]);
-		if (filter_var($name, FILTER_VALIDATE_EMAIL)) {
-			$password = validateInput($_POST["pw"]);
-			$rememberMe = $_POST["checkbox"]);
-		} else {
-		  $emailError("Please enter a valid email address.");
-		}
-	}
+class LoginController
+{
 
-	public static function validateInput($data){
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	}
-
+  public static function sanitizeInput($data)
+  {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
 
   /**
    * @return array
    */
-  public static function login() {
-    return [];
+  public function login()
+  {
+    if(UserSession::isSessionActive()) {
+      RoutingController::getInstance()->redirectRoute('home');
+    }
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      if(!array_key_exists('username', $_POST)) {
+        return [
+          'emailError' => 'You must fill in an email address.',
+        ];
+      } elseif (!array_key_exists('password', $_POST)) {
+        return [
+          'passwordError' => 'You must fill in a password.',
+        ];
+      }
+      $username = self::sanitizeInput($_POST["username"]);
+      $password = self::sanitizeInput($_POST['password']);
+      if(!UserSession::isSessionActive()) {
+        UserSession::open($username, $password);
+      }
+      $configReader = new ConfigReader('chub');
+      $checkCredentialRequest = new SecureRequest('POST', $configReader->requireConfig('chubId'), 'registration');
+      try {
+        $response = $checkCredentialRequest->send();
+      } catch (InvalidResponseException $e) {
+        return [
+          'loginError' => 'Invalid login credentials.',
+        ];
+      }
+    } else {
+      return [];
+    }
   }
+
+  public function logout() {
+    session_destroy();
+    RoutingController::getInstance()->redirectRoute('login');
+  }
+
+}
+
+
+
+

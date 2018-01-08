@@ -1,3 +1,18 @@
 login:
   template: 'login'
   controller: 'core\login\LoginController::login'
+
+home:
+  template: 'dashboard'
+  controller: 'core\dashboard\DashboardController::build'
+
+playback:
+  template: 'playback'
+  controller: 'core\playback\PlaybackController::build'
+
+config:
+  template: 'config'
+  controller: 'core\config\ConfigController::build'
+
+logout:
+  controller: 'core\login\LoginController::logout'

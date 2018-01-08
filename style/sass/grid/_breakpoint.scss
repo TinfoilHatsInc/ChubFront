@@ -1,0 +1,45 @@
+$breakpoints: (small: 0px, medium: 640px, large: 1024px, xlarge: 1200px, xxlarge: 1440px,);
+$breakpoint-classes: (small, medium, large);
+@function list-to-map($list) {
+  $map: ();
+  $index: 1;
+  @each $item in $list {
+    $map: map_merge($map, ($index: $item));
+    $index: $index + 1;
+  }
+  @return $map;
+}
+
+@function breakpoint($breakpoint) {
+  $dir: if(length($breakpoint) > 1, nth($breakpoint, 2), up);
+  $breakpoint: nth($breakpoint, 1);
+  @if (map_has_key($breakpoints, $breakpoint)) {
+    $keysList: map_keys($breakpoints);
+    $keysMap: list-to-map($keysList);
+    $currIndex: index($keysList, $breakpoint);
+    $nextVal: if($currIndex < length($breakpoints), map_get($breakpoints, map_get($keysMap, $currIndex + 1)), null);
+    $val: map_get($breakpoints, $breakpoint);
+    $str: '';
+    @if ($dir == 'only') {
+      @if ($nextVal == null) {
+        $str: $str + '(min-width: #{$val})';
+      } @else {
+        $str: $str + '(min-width: #{$val}) and (max-width: #{$nextVal - 1})';
+      }
+    } @else if ($dir == 'down') {
+      $str: $str + '(max-width: #{$val - 1})';
+    } @else {
+      $str: $str + '(min-width: #{$val})';
+    }
+    @return $str;
+  } @else {
+    @warn 'breakpoint(): "#{$breakpoint}" is not defined in your $breakpoints setting.'
+  }
+}
+
+@mixin breakpoint($breakpoint) {
+  $str: breakpoint($breakpoint);
+  @media screen and #{$str} {
+    @content;
+  }
+}

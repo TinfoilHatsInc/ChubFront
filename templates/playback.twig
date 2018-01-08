@@ -1,0 +1,32 @@
+{% include 'partials/menu.twig' %}
+<div class="row aside-offset">
+  <div class="column large-12">
+    <div class="column-content">
+      <h1>Playback</h1>
+    </div>
+  </div>
+  <link rel='stylesheet' href='/node_modules/fullcalendar/dist/fullcalendar.min.css'/>
+  <script src='/node_modules/moment/min/moment.min.js'></script>
+  <script src='/node_modules/fullcalendar/dist/fullcalendar.min.js'></script>
+  <div class="column large-12">
+    <div class="column-content">
+      <div id='calendar'></div>
+    </div>
+  </div>
+  {#<div class="column large-12">#}
+    {#<div class="column-content">#}
+      {#<video controls>#}
+        {#<source src="/files/videos/sample-video.m4v" type="video/mp4">#}
+        {#Your browser does not support the video tag.#}
+      {#</video>#}
+    {#</div>#}
+  {#</div>#}
+</div>
+<div class="video-popup">
+  <div class="close"></div>
+  <div class="video-container">
+    <video src="">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>

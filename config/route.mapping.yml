@@ -1,1 +1,5 @@
-/test: 'login'
+/login: 'login'
+/dashboard: 'home'
+/playback: 'playback'
+/module-config: 'config'
+/logout: 'logout'

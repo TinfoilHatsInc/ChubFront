@@ -1,0 +1,29 @@
+.video-popup {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: none;
+  background-color: rgba(0,0,0,.5);
+  margin-left: 200px;
+  z-index: 1;
+  .video-container {
+    display: table-cell;
+    vertical-align: middle;
+    z-index: 10;
+    position: relative;
+    text-align: center;
+    video {
+      width: 600px;
+    }
+  }
+  .close {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+  &.opened {
+    display: table !important;
+    top: 0;
+  }
+}

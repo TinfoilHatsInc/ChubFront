@@ -1,0 +1,57 @@
+body {
+  font-family:Arial;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+}
+
+/* Sets a style for all buttons */
+button {
+  background-color: $primary-button-color;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+/* Center the avatar image inside this container */
+.image-container {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+/* Logo image */
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+img.logo {
+  width:128px;
+  height:128px;
+}
+
+/* Adds padding to containers */
+.container {
+  padding: 16px;
+  margin: 0 auto;
+  width: 50%;
+}
+
+/* "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 8px;
+  @include breakpoint(small only) {
+    display: block;
+    float: none;
+  }
+}
+
+.row.aside-offset {
+  margin-left: 200px;
+}
