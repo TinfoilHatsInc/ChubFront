@@ -5,6 +5,13 @@
   "require": {
     "eden/sqlite": "^4.0",
     "twig/twig": "^2.4",
-    "symfony/yaml": "^3.4"
-  }
+    "symfony/yaml": "^3.4",
+    "tinfoilhatsinc/tinfoil-hmac": "^1.9"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/TinfoilHatsInc/TinfoilHMAC"
+    }
+  ]
 }
