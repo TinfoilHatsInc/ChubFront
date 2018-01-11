@@ -3,3 +3,7 @@
 /playback: 'playback'
 /module-config: 'config'
 /logout: 'logout'
+/event/flag: 'event.flag'
+/alarm/enable: 'alarm.enable'
+/alarm/disable: 'alarm.disable'
+/ajax/events/new: 'events.new'

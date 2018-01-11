@@ -1,7 +1,9 @@
-<aside class="menu">
+{% set menuLogo %}
   <div class="image-container">
     <img class="logo" src="/images/transparent_logo.png" alt="">
   </div>
+{% endset %}
+{% set menuContent %}
   <nav>
     <ul>
       <li>{{ link('Dashboard', '', 'home') }}</li>
@@ -10,4 +12,19 @@
       <li>{{ link('Logout', '', 'logout') }}</li>
     </ul>
   </nav>
+{% endset %}
+<div class="menu display-on-small">
+  {{ menuLogo }}
+  <button class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+  </button>
+  <div class="menu-content">
+    {{ menuContent }}
+  </div>
+</div>
+<aside class="menu hide-on-small">
+  {{ menuLogo }}
+  {{ menuContent }}
 </aside>

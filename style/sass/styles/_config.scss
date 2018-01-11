@@ -1,0 +1,57 @@
+h3.room-name {
+  margin: 5px 0;
+  @extend button;
+  display: block;
+  width: auto;
+}
+.drop-container {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #eee;
+  .module {
+    display: inline-block;
+    border: 1px solid lawngreen;
+    background-color: #ccff99;
+    padding: 2px 5px;
+    cursor: move;
+    margin: 5px;
+    &.not-alive {
+      background-color: #ff9966;
+      border-color: red;
+    }
+  }
+  &.triggers,
+  &.observers {
+    min-height: 100px;
+    position: relative;
+    &:before {
+      position: absolute;
+      display: flex;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      opacity: .4;
+      z-index: -1;
+    }
+    .module {
+      display: table;
+    }
+  }
+  &.triggers:before {
+    content: 'Triggers';
+  }
+  &.observers:before {
+    content: 'Observers';
+  }
+  &.unconfigured-modules {
+    min-height: 28px;
+  }
+}
+
+.link-icon {
+  font-size: 48px;
+}

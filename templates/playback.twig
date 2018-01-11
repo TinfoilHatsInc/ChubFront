@@ -8,25 +8,51 @@
   <link rel='stylesheet' href='/node_modules/fullcalendar/dist/fullcalendar.min.css'/>
   <script src='/node_modules/moment/min/moment.min.js'></script>
   <script src='/node_modules/fullcalendar/dist/fullcalendar.min.js'></script>
+  <script src='/js/dist/calendar.js'></script>
   <div class="column large-12">
     <div class="column-content">
       <div id='calendar'></div>
     </div>
   </div>
-  {#<div class="column large-12">#}
-    {#<div class="column-content">#}
-      {#<video controls>#}
-        {#<source src="/files/videos/sample-video.m4v" type="video/mp4">#}
-        {#Your browser does not support the video tag.#}
-      {#</video>#}
-    {#</div>#}
-  {#</div>#}
+  <div class="column large-12">
+    <div class="column-content">
+      <h2>Old events</h2>
+    </div>
+  </div>
+  <div class="column large-12">
+    <div class="column-content">
+      {% if oldEvents is empty %}
+        There are currently no critical events older than a month.
+      {% else %}
+        {% for event in oldEvents %}
+          <div class="old-event" data-event-id="{{ event.eventId }}">
+            {{ event.date|date("m-d-Y h:i:s") }} in the {{ event.room }}
+            {% for video in event.videos %}
+              <div class="video-src" data-video-src="{{ video }}"></div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
 </div>
-<div class="video-popup">
-  <div class="close"></div>
+<div class="video-popup aside-offset">
   <div class="video-container">
-    <video src="">
-      Your browser does not support the video tag.
-    </video>
+    <div class="close"></div>
+    <div class="video-wrapper">
+      <h2>Event</h2>
+      <div class="close-btn" title="Close"><i>close</i></div>
+      <div class="row">
+        <div class="column large-10 medium-10 small-10">
+          <div class="video"></div>
+        </div>
+        <div class="column large-2 medium-2 small-2">
+          <div class="video-elem-container"></div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="flag-btn"><i>flag</i><span class="text">Flag as critical</span></button>
+      </div>
+    </div>
   </div>
 </div>

@@ -5,4 +5,50 @@
       <h1>Dashboard</h1>
     </div>
   </div>
+  {% if not alarmEnabled %}
+    <div class="column large-12">
+      <div class="column-content">
+        <div class="message critical recomm-turn-on">
+          The alarm system is currently OFF, it is recommended to turn it ON.
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div class="column large-12">
+    <div class="column-content">
+      <form id="alarm-control" action="/alarm/{% if alarmEnabled %}disable{% else %}enable{% endif %}" method="post">
+        <div class="switch"
+             title="{% if alarmEnabled and not delayed %}Disable alarm{% elseif not alarmEnabled and not delayed %}Enable alarm{% endif %}">
+          <input type="checkbox" class="{% if delayed %}delayed{% endif %}" {% if not alarmEnabled %}checked{% endif %}>
+          <label></label>
+          <div class="sk-fading-circle">
+            <div class="sk-circle1 sk-circle"></div>
+            <div class="sk-circle2 sk-circle"></div>
+            <div class="sk-circle3 sk-circle"></div>
+            <div class="sk-circle4 sk-circle"></div>
+            <div class="sk-circle5 sk-circle"></div>
+            <div class="sk-circle6 sk-circle"></div>
+            <div class="sk-circle7 sk-circle"></div>
+            <div class="sk-circle8 sk-circle"></div>
+            <div class="sk-circle9 sk-circle"></div>
+            <div class="sk-circle10 sk-circle"></div>
+            <div class="sk-circle11 sk-circle"></div>
+            <div class="sk-circle12 sk-circle"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% if delayed %}
+    <div class="column large-12">
+      <div class="column-content content-centered">
+        The alarm will be enabled in <span class="remaining-time">{{ remaining }}</span> seconds.
+      </div>
+    </div>
+  {% endif %}
+  <div class="column large-12">
+    <div class="column-content">
+      Current status: <strong class="alarm-status">{% if alarmEnabled %}ON{% else %}OFF{% endif %}</strong>
+    </div>
+  </div>
 </div>

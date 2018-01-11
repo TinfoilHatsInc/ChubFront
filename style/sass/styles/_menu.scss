@@ -1,10 +1,48 @@
 aside.menu {
   width: 200px;
-  background-color: $first-bg-color;
   height: 100%;
   display: inline-block;
-  position: fixed;
   border-right: 1px solid darken($first-bg-color, 20%);
+
+}
+div.menu {
+  display: none;
+  width: 100%;
+  .image-container {
+    display: inline-block;
+    margin: 0;
+    .logo {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  .hamburger {
+    float: right;
+    width: auto;
+    margin: 15px 5px 0;
+    .hamburger-inner {
+      background-color: white;
+      &:before, &:after {
+        background-color: white;
+      }
+    }
+  }
+  .menu-content {
+    display: none;
+    position: absolute;
+    width: 100%;;
+    background-color: rgba(0,0,0,.4);
+    nav ul li a {
+      margin: 2px 0;
+    }
+  }
+}
+aside.menu,
+div.menu {
+  background-color: $first-bg-color;
+  z-index: 999;
+  position: fixed;
+  top: 0;
   nav {
     ul {
       list-style: none;
@@ -19,7 +57,7 @@ aside.menu {
           text-decoration: none;
           text-align: center;
           &.active {
-            background-color: transparentize($primary-button-color, 0.7) !important;
+            background-color: rgb(107,108,130) !important;
           }
         }
       }

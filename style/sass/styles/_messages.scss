@@ -1,0 +1,24 @@
+.message {
+  color: white;
+  border-radius: 5px;
+  border: 1px solid rgba(0,0,0,.2);
+  position: relative;
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  &:before {
+    font-family: $material-icons-font;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 24px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  &.critical {
+    background-color: #DA4453;
+    &::before {
+      content: 'error';
+    }
+  }
+}

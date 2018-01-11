@@ -16,3 +16,15 @@ config:
 
 logout:
   controller: 'core\login\LoginController::logout'
+
+event.flag:
+  controller: 'core\playback\EventFlagController::flagEvent'
+
+alarm.enable:
+  controller: 'core\alarm\AlarmController::enableAlarm'
+
+alarm.disable:
+  controller: 'core\alarm\AlarmController::disableAlarm'
+
+events.new:
+  controller: 'core\playback\PlaybackController::getNewEvents'

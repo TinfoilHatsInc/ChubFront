@@ -7,8 +7,15 @@ body {
   min-height: 100%;
 }
 
+@media screen and (min-width: 0px) and (max-width: 639px) {
+  body {
+    padding-top: 84px;
+  }
+}
+
 /* Sets a style for all buttons */
-button, aside.menu nav ul li a {
+button, aside.menu nav ul li a,
+div.menu nav ul li a, h3.room-name {
   background-color: #00004d;
   color: white;
   padding: 14px 20px;
@@ -18,8 +25,16 @@ button, aside.menu nav ul li a {
   width: 100%;
 }
 
-button:hover, aside.menu nav ul li a:hover {
+button:hover, aside.menu nav ul li a:hover,
+div.menu nav ul li a:hover, h3.room-name:hover {
   opacity: 0.8;
+}
+
+button i, aside.menu nav ul li a i,
+div.menu nav ul li a i, h3.room-name i {
+  font-style: normal;
+  font-family: "Material Icons";
+  padding-right: 5px;
 }
 
 /* Center the avatar image inside this container */
@@ -61,6 +76,38 @@ span.psw {
 
 .row.aside-offset {
   margin-left: 200px;
+}
+
+@media screen and (min-width: 0px) and (max-width: 639px) {
+  .row.aside-offset {
+    margin-left: 0;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 639px) {
+  .hide-on-small {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 639px) {
+  .display-on-small {
+    display: block !important;
+  }
+}
+
+.content-centered {
+  text-align: center;
+  justify-content: center;
+}
+
+.content-v-centered {
+  vertical-align: middle;
+  align-items: center;
+}
+
+i.material-icons {
+  font-family: "Material Icons";
 }
 
 .clear-fix, .row {
@@ -499,20 +546,68 @@ input[type=text], input[type=password] {
 
 aside.menu {
   width: 200px;
-  background-color: #006666;
   height: 100%;
   display: inline-block;
-  position: fixed;
   border-right: 1px solid black;
 }
 
-aside.menu nav ul {
+div.menu {
+  display: none;
+  width: 100%;
+}
+
+div.menu .image-container {
+  display: inline-block;
+  margin: 0;
+}
+
+div.menu .image-container .logo {
+  width: 80px;
+  height: 80px;
+}
+
+div.menu .hamburger {
+  float: right;
+  width: auto;
+  margin: 15px 5px 0;
+}
+
+div.menu .hamburger .hamburger-inner {
+  background-color: white;
+}
+
+div.menu .hamburger .hamburger-inner:before, div.menu .hamburger .hamburger-inner:after {
+  background-color: white;
+}
+
+div.menu .menu-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+div.menu .menu-content nav ul li a {
+  margin: 2px 0;
+}
+
+aside.menu,
+div.menu {
+  background-color: #006666;
+  z-index: 999;
+  position: fixed;
+  top: 0;
+}
+
+aside.menu nav ul,
+div.menu nav ul {
   list-style: none;
   margin: 0;
   padding: 10px;
 }
 
-aside.menu nav ul li a {
+aside.menu nav ul li a,
+div.menu nav ul li a {
   display: inline-block;
   padding-left: 0;
   padding-right: 0;
@@ -520,8 +615,9 @@ aside.menu nav ul li a {
   text-align: center;
 }
 
-aside.menu nav ul li a.active {
-  background-color: rgba(0, 0, 77, 0.3) !important;
+aside.menu nav ul li a.active,
+div.menu nav ul li a.active {
+  background-color: #6b6c82 !important;
 }
 
 .video-popup {
@@ -529,21 +625,101 @@ aside.menu nav ul li a.active {
   height: 100%;
   width: 100%;
   display: none;
-  background-color: rgba(0, 0, 0, 0.5);
-  margin-left: 200px;
   z-index: 1;
+}
+
+.video-popup.aside-offset .video-container {
+  padding-left: 200px;
+}
+
+@media screen and (min-width: 0px) and (max-width: 639px) {
+  .video-popup.aside-offset .video-container {
+    padding-left: 0;
+  }
 }
 
 .video-popup .video-container {
   display: table-cell;
   vertical-align: middle;
-  z-index: 10;
   position: relative;
-  text-align: center;
+  max-height: 100%;
 }
 
-.video-popup .video-container video {
-  width: 600px;
+.video-popup .video-container .video-wrapper {
+  margin: 10px;
+  background-color: white;
+  max-height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  padding: 5px;
+  position: relative;
+}
+
+.video-popup .video-container .video-wrapper video {
+  width: 100%;
+}
+
+.video-popup .video-container .video-wrapper .close-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px;
+}
+
+.video-popup .video-container .video-wrapper .close-btn i {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.video-popup .video-container .video-wrapper .controls .flag-btn {
+  display: inline-block;
+  width: auto;
+}
+
+.video-popup .video-container .video-wrapper .controls .flag-btn.flagged {
+  background-color: rgba(0, 0, 77, 0.5);
+}
+
+.video-popup .video-container .video-wrapper .video-elem-container {
+  overflow-y: auto;
+  padding-left: 5px;
+  max-height: 100%;
+}
+
+.video-popup .video-container .video-wrapper .video-elem-container .video-elem {
+  cursor: pointer;
+  position: relative;
+}
+
+.video-popup .video-container .video-wrapper .video-elem-container .video-elem.active:after {
+  content: 'play_arrow';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Material Icons";
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 640px) and (max-width: 1023px) {
+  .video-popup .video-container .video-wrapper .video-elem-container .video-elem.active:after {
+    font-size: 38px;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 639px) {
+  .video-popup .video-container .video-wrapper .video-elem-container .video-elem.active:after {
+    font-size: 20px;
+  }
+}
+
+.video-popup .video-container .video-wrapper .video-elem-container .video-elem:hover {
+  opacity: .5;
 }
 
 .video-popup .close {
@@ -551,9 +727,397 @@ aside.menu nav ul li a.active {
   top: 0;
   height: 100%;
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
 .video-popup.opened {
   display: table !important;
   top: 0;
+}
+
+.fc-event {
+  cursor: pointer;
+  background-color: orange !important;
+}
+
+.fc-event.critical {
+  background-color: red !important;
+}
+
+.fc-event .fc-title i {
+  padding: 0 5px;
+  font-family: "Material Icons";
+  font-style: normal;
+  position: relative;
+  top: 2px;
+}
+
+.old-event {
+  text-decoration: underline;
+  color: #3399ff;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+h3.room-name {
+  margin: 5px 0;
+  display: block;
+  width: auto;
+}
+
+.drop-container {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #eee;
+}
+
+.drop-container .module {
+  display: inline-block;
+  border: 1px solid lawngreen;
+  background-color: #ccff99;
+  padding: 2px 5px;
+  cursor: move;
+  margin: 5px;
+}
+
+.drop-container .module.not-alive {
+  background-color: #ff9966;
+  border-color: red;
+}
+
+.drop-container.triggers, .drop-container.observers {
+  min-height: 100px;
+  position: relative;
+}
+
+.drop-container.triggers:before, .drop-container.observers:before {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  opacity: .4;
+  z-index: -1;
+}
+
+.drop-container.triggers .module, .drop-container.observers .module {
+  display: table;
+}
+
+.drop-container.triggers:before {
+  content: 'Triggers';
+}
+
+.drop-container.observers:before {
+  content: 'Observers';
+}
+
+.drop-container.unconfigured-modules {
+  min-height: 28px;
+}
+
+.link-icon {
+  font-size: 48px;
+}
+
+.switch {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  position: relative;
+  margin-top: 50px;
+}
+
+.switch input {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  opacity: 0;
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.switch input:checked ~ label {
+  background: lawngreen;
+  background: -moz-linear-gradient(#00b300, #00ff00);
+  background: -ms-linear-gradient(#00b300, #00ff00);
+  background: -o-linear-gradient(#00b300, #00ff00);
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#00b300), to(#00ff00));
+  background: -webkit-linear-gradient(#00b300, #00ff00);
+  background: linear-gradient(#00b300, #00ff00);
+}
+
+.switch input.delayed {
+  cursor: default;
+}
+
+.switch input.delayed ~ label {
+  background: #dedede;
+  background: -moz-linear-gradient(#dedede, #fdfdfd);
+  background: -ms-linear-gradient(#dedede, #fdfdfd);
+  background: -o-linear-gradient(#dedede, #fdfdfd);
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#dedede), to(#fdfdfd));
+  background: -webkit-linear-gradient(#dedede, #fdfdfd);
+  background: linear-gradient(#dedede, #fdfdfd);
+}
+
+.switch input.delayed ~ .sk-fading-circle {
+  display: block;
+}
+
+.switch label {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: block;
+  border-radius: 50%;
+  background: red;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -5px 5px rgba(100, 100, 100, 0.1), inset 0 5px 5px rgba(255, 255, 255, 0.3);
+}
+
+.switch label:before {
+  font-family: "Material Icons";
+  content: "security";
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  border-radius: inherit;
+  left: 40%;
+  top: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  opacity: .2;
+}
+
+.switch label:after {
+  content: "";
+  position: absolute;
+  top: -8%;
+  right: -8%;
+  bottom: -8%;
+  left: -8%;
+  z-index: -1;
+  border-radius: inherit;
+  background: #ddd;
+  background: -moz-linear-gradient(#ccc, #fff);
+  background: -ms-linear-gradient(#ccc, #fff);
+  background: -o-linear-gradient(#ccc, #fff);
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#ccc), to(#fff));
+  background: -webkit-linear-gradient(#ccc, #fff);
+  background: linear-gradient(#ccc, #fff);
+  box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(200, 200, 200, 0.1);
+}
+
+.switch .sk-fading-circle {
+  width: 172px;
+  height: 172px;
+  position: absolute;
+  top: -11px;
+  left: -11px;
+  display: none;
+}
+
+.switch .sk-fading-circle .sk-circle {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.switch .sk-fading-circle .sk-circle:before {
+  content: '';
+  display: block;
+  margin: 0 auto;
+  width: 6%;
+  height: 6%;
+  background-color: #333;
+  border-radius: 100%;
+  -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+  animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+}
+
+.switch .sk-fading-circle .sk-circle2 {
+  -webkit-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  transform: rotate(30deg);
+}
+
+.switch .sk-fading-circle .sk-circle3 {
+  -webkit-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+
+.switch .sk-fading-circle .sk-circle4 {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.switch .sk-fading-circle .sk-circle5 {
+  -webkit-transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  transform: rotate(120deg);
+}
+
+.switch .sk-fading-circle .sk-circle6 {
+  -webkit-transform: rotate(150deg);
+  -ms-transform: rotate(150deg);
+  transform: rotate(150deg);
+}
+
+.switch .sk-fading-circle .sk-circle7 {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.switch .sk-fading-circle .sk-circle8 {
+  -webkit-transform: rotate(210deg);
+  -ms-transform: rotate(210deg);
+  transform: rotate(210deg);
+}
+
+.switch .sk-fading-circle .sk-circle9 {
+  -webkit-transform: rotate(240deg);
+  -ms-transform: rotate(240deg);
+  transform: rotate(240deg);
+}
+
+.switch .sk-fading-circle .sk-circle10 {
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.switch .sk-fading-circle .sk-circle11 {
+  -webkit-transform: rotate(300deg);
+  -ms-transform: rotate(300deg);
+  transform: rotate(300deg);
+}
+
+.switch .sk-fading-circle .sk-circle12 {
+  -webkit-transform: rotate(330deg);
+  -ms-transform: rotate(330deg);
+  transform: rotate(330deg);
+}
+
+.switch .sk-fading-circle .sk-circle2:before {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.switch .sk-fading-circle .sk-circle3:before {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+
+.switch .sk-fading-circle .sk-circle4:before {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.switch .sk-fading-circle .sk-circle5:before {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+.switch .sk-fading-circle .sk-circle6:before {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+
+.switch .sk-fading-circle .sk-circle7:before {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+
+.switch .sk-fading-circle .sk-circle8:before {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+
+.switch .sk-fading-circle .sk-circle9:before {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s;
+}
+
+.switch .sk-fading-circle .sk-circle10:before {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+
+.switch .sk-fading-circle .sk-circle11:before {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s;
+}
+
+.switch .sk-fading-circle .sk-circle12:before {
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s;
+}
+
+@-webkit-keyframes sk-circleFadeDelay {
+  0%, 39%, 100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes sk-circleFadeDelay {
+  0%, 39%, 100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+.remaining-time {
+  font-weight: bold;
+}
+
+.message {
+  color: white;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+}
+
+.message:before {
+  font-family: "Material Icons";
+  position: absolute;
+  top: 0;
+  left: 5px;
+  font-size: 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.message.critical {
+  background-color: #DA4453;
+}
+
+.message.critical::before {
+  content: 'error';
 }

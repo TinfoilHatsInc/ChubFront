@@ -5,7 +5,9 @@ namespace core\login;
 use core\common\ConfigReader;
 use core\routing\RoutingController;
 use TinfoilHMAC\API\SecureRequest;
+use TinfoilHMAC\Exception\InvalidHMACException;
 use TinfoilHMAC\Exception\InvalidResponseException;
+use TinfoilHMAC\Util\Session;
 use TinfoilHMAC\Util\UserSession;
 
 class LoginController
@@ -46,7 +48,8 @@ class LoginController
       $checkCredentialRequest = new SecureRequest('POST', $configReader->requireConfig('chubId'), 'registration');
       try {
         $response = $checkCredentialRequest->send();
-      } catch (InvalidResponseException $e) {
+        RoutingController::getInstance()->redirectRoute('home');
+      } catch (InvalidResponseException | InvalidHMACException $e) {
         return [
           'loginError' => 'Invalid login credentials.',
         ];
@@ -57,7 +60,10 @@ class LoginController
   }
 
   public function logout() {
-    session_destroy();
+    if(UserSession::isSessionActive()) {
+      UserSession::destroy();
+    }
+    Session::getInstance()->invalidateKnownSharedKey();
     RoutingController::getInstance()->redirectRoute('login');
   }
 

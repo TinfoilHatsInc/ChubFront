@@ -6,7 +6,8 @@
     "eden/sqlite": "^4.0",
     "twig/twig": "^2.4",
     "symfony/yaml": "^3.4",
-    "tinfoilhatsinc/tinfoil-hmac": "^1.9"
+    "tinfoilhatsinc/tinfoil-hmac": "^2.0",
+    "greenlion/PHP-SQL-Parser": "^4.1"
   },
   "repositories": [
     {

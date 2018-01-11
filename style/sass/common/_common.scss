@@ -3,6 +3,9 @@ body {
   padding: 0;
   margin: 0;
   min-height: 100%;
+  @include breakpoint(small only) {
+    padding-top: 84px;
+  }
 }
 
 /* Sets a style for all buttons */
@@ -16,6 +19,11 @@ button {
   width: 100%;
   &:hover {
     opacity: 0.8;
+  }
+  i {
+    font-style: normal;
+    font-family: $material-icons-font;
+    padding-right: 5px;
   }
 }
 
@@ -54,4 +62,33 @@ span.psw {
 
 .row.aside-offset {
   margin-left: 200px;
+  @include breakpoint(small only) {
+    margin-left: 0;
+  }
+}
+
+.hide-on-small {
+  @include breakpoint(small only) {
+    display: none !important;
+  }
+}
+
+.display-on-small {
+  @include breakpoint(small only) {
+    display: block !important;
+  }
+}
+
+.content-centered {
+  text-align: center;
+  justify-content: center;
+}
+
+.content-v-centered {
+  vertical-align: middle;
+  align-items: center;
+}
+
+i.material-icons {
+  font-family: $material-icons-font;
 }

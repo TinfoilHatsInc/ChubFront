@@ -7,12 +7,38 @@
   </div>
   <div class="column large-12">
     <div class="column-content">
-      <h2>Rooms</h2>
+      <ul class="unconfigured-modules drop-container">
+        {% for module in unconfiguredModules %}<li data-module-id="{{ module.ID }}" class="unconfigured-module module{% if module.Alive == "0" %} not-alive{% endif %}">{{ module.Name }}</li>{% endfor %}
+      </ul>
     </div>
   </div>
   <div class="column large-12">
     <div class="column-content">
-
+      <div class="rooms-accordion">
+        {% for room in rooms %}
+          <h3 class="room-name">{{ room.Name }}</h3>
+          <div class="row extended">
+            <div class="column large-5 medium-5 small-5">
+              <div class="column-content">
+                <ul class="drop-container triggers" data-room-id="{{ room.ID }}">
+                </ul>
+              </div>
+            </div>
+            <div class="column large-2 medium-2 small-2 content-centered content-v-centered">
+              <i class="material-icons link-icon">arrow_forward</i>
+            </div>
+            <div class="column large-5 medium-5 small-5">
+              <div class="column-content">
+                <ul class="drop-container observers" data-room-id="{{ room.ID }}">
+                </ul>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
+<form id="config-actions" action="/module-config/save" method="post">
+
+</form>
