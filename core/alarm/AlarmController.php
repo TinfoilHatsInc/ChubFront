@@ -14,16 +14,17 @@ class AlarmController
   public function enableAlarm()
   {
     $config = self::getAlarmCache();
-    $timestamp = new \DateTime($config['alarmOnTimestamp']);
+    $savedTimestamp = $config['alarmOnTimestamp'];
+    $timestamp = new \DateTime($savedTimestamp);
     $diff = (new \DateTime())->diff($timestamp);
     $status = PythonExecuter::callSerializer('--get_armed');
-    if ($status == 'false' && !($diff->y == 0
+    if (($status == 'false' && !($diff->y == 0
       && $diff->m == 0
       && $diff->d == 0
       && $diff->h == 0
       && $diff->i == 0
       && $diff->s < 30
-    )) {
+    )) || empty($savedTimestamp)) {
       self::writeOnTimestamp();
       exec('php -f ' . __DIR__ . '/../scripts/ArmAlarm.php > /dev/null &');
     }
