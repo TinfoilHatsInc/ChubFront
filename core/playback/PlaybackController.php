@@ -23,7 +23,7 @@ class PlaybackController
 
     $oldEvents = [];
 
-    $rooms = $this->databaseController->getAllEvents();
+    $rooms = $this->databaseController->getAllRoomModules();
 
     foreach ($rooms as $room) {
       foreach ($room['Events'] as $event) {
@@ -59,7 +59,7 @@ class PlaybackController
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
       $events = [];
 
-      $rooms = $this->databaseController->getAllEvents();
+      $rooms = $this->databaseController->getAllRoomModules();
 
       foreach ($rooms as $room) {
         foreach ($room['Events'] as $event) {

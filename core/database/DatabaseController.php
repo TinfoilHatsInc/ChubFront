@@ -36,7 +36,7 @@ class DatabaseController
     );
   }
 
-  public function getAllEvents() {
+  public function getAllRoomModules() {
     $result = [];
     $rooms = $this->databaseConnector->executeSelectStatement(
       'SELECT * FROM room WHERE ID != 0'
@@ -47,5 +47,14 @@ class DatabaseController
     }
     return $result;
   }
+
+  public function getAllEvents() {
+    $room = $this->databaseConnector->executeSelectStatement(
+      'SELECT * FROM room WHERE ID = 0'
+    );
+    return $room[0]['Events'];
+  }
+
+
 
 }
