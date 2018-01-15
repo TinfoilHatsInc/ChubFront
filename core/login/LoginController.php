@@ -49,7 +49,11 @@ class LoginController
       try {
         $response = $checkCredentialRequest->send();
         RoutingController::getInstance()->redirectRoute('home');
-      } catch (InvalidResponseException | InvalidHMACException $e) {
+      } catch (InvalidResponseException $e) {
+        return [
+          'loginError' => 'Invalid login credentials.',
+        ];
+      } catch (InvalidHMACException $e) {
         return [
           'loginError' => 'Invalid login credentials.',
         ];
