@@ -43,6 +43,15 @@ class PlaybackController
 
   public static function formatEvent($roomId, $roomName, array $event)
   {
+    $formattedVideos = [];
+    $fileLocations = array_column($event['Recordings'], 'File_Location');
+    foreach($fileLocations as $fileLocation) {
+      $videos = glob(__DIR__ . '/../..' . $fileLocation . '/*.mp4');
+      $videos = array_map(function ($name) use ($fileLocation) {
+        return $fileLocation . '/' . basename($name);
+      }, $videos);
+      $formattedVideos = array_merge($formattedVideos, $videos);
+    }
     $timestamp = new \DateTime($event['Datetime']);
     return [
       'eventId' => $event['ID'],
@@ -50,7 +59,7 @@ class PlaybackController
       'room' => $roomName,
       'roomId' => $roomId,
       'isCritical' => $event['Important'],
-      'videos' => array_column($event['Recordings'], 'File_Location'),
+      'videos' => $formattedVideos,
     ];
   }
 

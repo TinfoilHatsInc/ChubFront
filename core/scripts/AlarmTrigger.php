@@ -18,9 +18,15 @@ $formattedRecordings = [];
 
 foreach($recordings as $recording) {
   $path = $recording['File_Location'];
-  $type = pathinfo($path, PATHINFO_EXTENSION);
-  $data = file_get_contents($path);
-  $formattedRecordings[] = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+  $files = glob($path . '/*.jpg');
+
+  foreach($files as $file) {
+    $type = pathinfo($file, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $formattedRecordings[] = 'data:image/' . $type . ';base64,' . base64_encode($data);
+  }
+
 }
 
 $chubId = $configReader->requireConfig('chubId');
