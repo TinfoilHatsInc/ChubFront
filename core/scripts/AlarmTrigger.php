@@ -16,15 +16,22 @@ $recordings = $event['Recordings'];
 
 $formattedRecordings = [];
 
+$maxSnapshots = $configReader->requireConfig('maxSnapshots');
+
 foreach($recordings as $recording) {
   $path = $recording['File_Location'];
 
   $files = glob($path . '/*.jpg');
 
+  $num = 0;
   foreach($files as $file) {
+    if($num == $maxSnapshots) {
+      break;
+    }
     $type = pathinfo($file, PATHINFO_EXTENSION);
     $data = file_get_contents($path);
     $formattedRecordings[] = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    $num++;
   }
 
 }
