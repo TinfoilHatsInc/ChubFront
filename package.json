@@ -12,7 +12,8 @@
     "fullcalendar": "^3.8.0",
     "hamburgers": "^0.9.1",
     "jquery": "^3.2.1",
-    "jquery-ui-dist": "^1.12.1"
+    "jquery-ui-dist": "^1.12.1",
+    "moment": "^2.20.1"
   },
   "devDependencies": {
     "event-stream": "^3.3.4",
