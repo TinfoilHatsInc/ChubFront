@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../autoload.php';
 use core\database\DatabaseController;
 use TinfoilHMAC\API\SecureRequest;
 use core\common\ConfigReader;
+use TinfoilHMAC\Util\Session;
 
 $configReader = new ConfigReader('chub');
 
@@ -38,8 +39,10 @@ foreach($recordings as $recording) {
 
 $chubId = $configReader->requireConfig('chubId');
 
+Session::getInstance()->initClientSharedKey();
+
 $request = new SecureRequest('POST', $chubId, 'alarmTrigger', [
   'triggerName' => 'Trigger #',
   'snapshots' => $formattedRecordings,
 ]);
-$response = $request->send();
+$response = $request->send(TRUE);
