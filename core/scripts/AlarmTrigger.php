@@ -11,7 +11,7 @@ $configReader = new ConfigReader('chub');
 
 $databaseController = new DatabaseController();
 
-$event = $databaseController->getAllEvents()[0];
+$event = array_reverse($databaseController->getAllEvents())[0];
 
 $recordings = $event['Recordings'];
 
