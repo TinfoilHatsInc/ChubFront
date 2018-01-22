@@ -1,7 +1,7 @@
 {
   "name": "tinfoilhatsinc/chub-front",
   "description": "TinfoilHats Inc. CHUB front",
-  "license": "MIT",
+  "license": "GPL",
   "require": {
     "eden/sqlite": "^4.0",
     "twig/twig": "^2.4",
